@@ -1,0 +1,150 @@
+<head>
+    <link rel="stylesheet" href="/resources/css/modal.css" />
+    <link rel="stylesheet" href="/resources/jQuery-Upload-File/4.0.11/uploadfile.css" />
+    <script type="text/javascript" src="/resources/js/soojib.js"></script>
+    <script type="text/javascript" src="/resources/jQuery-Upload-File/4.0.11/jquery.uploadfile.js"></script>
+</head>
+<body>
+    <div class="modal fade" id="centerModal" tabindex="-1" role="dialog" aria-labelledby="centerModalLabel" style="z-index:1050;">
+        <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-alignment-center" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <span id="spCenterModalTitle"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" id="dvCenterModalContent">
+                <form class="form-horizontal">
+                    <input type="hidden" id="key" name="key" />
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="damdang">관리자:</label>
+                        <div class="col-sm-10">
+                            <select id="damdang" class="form-control" name="damdang">
+                                <option value="">-- 관리자 선택 --</option>
+                                <option value="김사라">김사라</option>
+                                <option value="김준인">김준인</option>
+                                <option value="남기훈">남기훈</option>
+                                <option value="박성원">박성원</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="soojibRatio">진행률:</label>
+                        <div class="col-sm-10">
+                            <select id="soojibRatio" class="form-control" name="soojibRatio">
+                                <option value="0">0%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                                <option value="40">40%</option>
+                                <option value="50">50%</option>
+                                <option value="60">60%</option>
+                                <option value="70">70%</option>
+                                <option value="80">80%</option>
+                                <option value="90">90%</option>
+                                <option value="100">100%</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="soojibMethod">수집 방법:</label>
+                        <div class="col-sm-10"> 
+                            <textarea class="form-control" id="soojibMethod" name="soojibMethod"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="soojibStatus">진행상황:</label>
+                        <div class="col-sm-10"> 
+                            <textarea class="form-control" id="soojibStatus" name="soojibStatus"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="soojibBigo">비고 :</label>
+                        <div class="col-sm-10"> 
+                            <textarea class="form-control" id="soojibBigo" name="soojibBigo"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="soojibUpdate">업데이트주기 :</label>
+                        <div class="col-sm-10"> 
+                            <input type="text" class="form-control" id="soojibUpdate" name="soojibUpdate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="soojibFile">툴 업로드 :</label>
+                        <div class="col-sm-10"> 
+                            <div id="fileUp" style="width: 250px;">등록</div> 
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="btnModify" type="button" class="btn btn-default">수정</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <caption>데이터 수집 관리</caption>
+        <colgroup>
+            <col with="5%" />
+            <col width="15%" />
+            <col width="10%" />
+            <col width="5%" />
+            <col width="15%" />
+            <col width="20%" />
+            <col width="15%" />
+            <col width="10%" />
+            <col width="5%" />
+        </colgroup>
+        <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>관리내용</th>
+              <th>관리자</th>
+              <th>진행률</th>
+              <th>수집방법</th>
+              <th>진행상황</th>
+              <th>비고</th>
+              <th>업데이트 주기</th>
+              <th>관리툴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="line">
+                <td colspan="9"></td>
+            </tr>
+            {{#if list}}
+            {{#each list}}
+            <tr data-seri="{{고유번호}}"
+                data-content="{{관리내용}}" 
+                data-damdang="{{관리자}}" 
+                data-soojib-method="{{수집방법}}" 
+                data-soojib-status="{{진행상황}}"
+                data-soojib-bigo="{{비고}}"
+                data-soojib-ratio="{{진행율}}"
+                data-soojib-update="{{업데이트주기}}">
+                <td>{{#ifCond 활성화 'N'}}({{/ifCond}}{{순서}}{{#ifCond 활성화 'N'}}){{/ifCond}}</td>
+                <td class="td-content">{{관리내용}}</td>
+                <td class="td-damdang">{{관리자}}</td>
+                <td class="td-progressive">{{진행율}}%</td>
+                <td class="td-method">{{수집방법}}</td>
+                <td class="td-status">{{진행상황}}</td>
+                <td class="td-bigo">{{비고}}</td>
+                <td class="td-update">{{업데이트주기}}</td>
+                <td class="td-tool">{{#if 관리툴}}<a href="#" onclick="downloadTool('{{관리툴}}')">다운로드</a><a href="#" onClick="deleteTool('{{고유번호}}')"><img src="/resources/img/delete.png" /></a>{{/if}}</td>
+            </tr>
+            <tr class="line">
+                <td colspan="9"></td>
+            </tr>
+            {{/each}}
+
+            {{/if}}
+       
+          </tbody>
+
+    </table>
+</body>
